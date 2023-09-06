@@ -6,8 +6,8 @@
  ```
 
   request = {
-            "use" : "moorse_code" ,
-            "parameters" : {"text":"GEEKS-FOR-GEEKS"} 
+              "use" : "moorse_code" ,
+              "parameters" : {"text":"GEEKS-FOR-GEEKS"} 
             }
 
  ```

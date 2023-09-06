@@ -1,17 +1,15 @@
-'''Implement Services, provided in lambda function '''
+'''
+Implement Services, provided in lambda function.
+Services Offered in this tools
+1) Moorse Code
+2) Temprature Converter
+3) Password Strength Checker
+4) Email Validator
+5) String Capitalization
+ '''
 import re
 
 # Python program to implement Morse Code Translator
-
-'''
-VARIABLE KEY
-'cipher' -> 'stores the morse translated form of the english string'
-'decipher' -> 'stores the english translated form of the morse string'
-'citext' -> 'stores morse code of a single character'
-'i' -> 'keeps count of the spaces between morse characters'
-'message' -> 'stores the string to be encoded or decoded'
-'''
-
 # Dictionary representing the morse code chart
 MORSE_CODE_DICT = { 'A':'.-', 'B':'-...',
 					'C':'-.-.', 'D':'-..', 'E':'.',
@@ -33,7 +31,18 @@ MORSE_CODE_DICT = { 'A':'.-', 'B':'-...',
 # according to the morse code chart
 
 # 1
-def encrypt(message):
+def encrypt(message : str) -> str:
+    '''
+    Encrypt message into moorse code.
+    
+    Parametrs
+    --------
+    message
+		Text to converted into moorse code
+    
+	Return
+    string
+    '''
     cipher = ''
     for letter in message:
         if letter != ' ':
@@ -51,47 +60,55 @@ def encrypt(message):
 
 # Function to decrypt the string
 # from morse to english
-def decrypt(message):
-
-	# extra space added at the end to access the
-	# last morse code
-	message += ' '
-
-	decipher = ''
-	citext = ''
-	for letter in message:
-
-		# checks for space
-		if (letter != ' '):
-
-			# counter to keep track of space
-			i = 0
-
-			# storing morse code of a single character
-			citext += letter
-
-		# in case of space
-		else:
-			# if i = 1 that indicates a new character
-			i += 1
-
-			# if i = 2 that indicates a new word
-			if i == 2 :
-
-				# adding space to separate words
-				decipher += ' '
-			else:
-
-				# accessing the keys using their values (reverse of encryption)
-				decipher += list(MORSE_CODE_DICT.keys())[list(MORSE_CODE_DICT
-				.values()).index(citext)]
-				citext = ''
-
-	return decipher
+# def decrypt(message : str) -> str:
+#    '''
+#     Encrypt message into moorse code.
+    
+#     Parametrs
+#     --------
+#     message
+# 		Moorse code to converted into text
+    
+# 	Return
+#     string
+#     '''
+# 	message += ' '
+# 	decipher = ''
+# 	citext = ''
+# 	for letter in message:
+# 		# checks for space
+# 		if (letter != ' '):
+# 			# counter to keep track of space
+# 			i = 0
+# 			# storing morse code of a single character
+# 			citext += letter
+# 		# in case of space
+# 		else:
+# 			# if i = 1 that indicates a new character
+# 			i += 1
+# 			# if i = 2 that indicates a new word
+# 			if i == 2 :
+# 				# adding space to separate words
+# 				decipher += ' '
+# 			else:
+# 				# accessing the keys using their values (reverse of encryption)
+# 				decipher += list(MORSE_CODE_DICT.keys())[list(MORSE_CODE_DICT
+# 				.values()).index(citext)]
+# 				citext = ''
+# 	return decipher
 
 # 2
-def temp_converter(to_temp , from_temp, temp):
+def temp_converter(to_temp : str , from_temp : str, temp : int ) -> float:
+    '''
+    Temprature conversion from farenheit to celsius and vice versa
 
+    Parameters
+    ---------- 
+    
+    Return
+    ------
+    
+    '''
     if to_temp == 'F' and from_temp == 'C':
         temp_cal = (temp-32)/1.8
         return temp_cal
@@ -101,53 +118,74 @@ def temp_converter(to_temp , from_temp, temp):
 
 
 # 3
-def validate_password(password):
+def validate_password(password : str) -> bool:
+    '''
+    Check stregth of password
+    
+    Parameters
+    ---------- 
+    password
+			Password to check strength 
+    Return
+    bool
+    ------
+    '''
     # Check if the password has at least 8 characters
     if len(password) < 8:
         return False
-    
     # Check if the password contains at least one uppercase letter
     if not re.search(r'[A-Z]', password):
         return False
-    
     # Check if the password contains at least one lowercase letter
     if not re.search(r'[a-z]', password):
         return False
-    
     # Check if the password contains at least one digit
     if not re.search(r'\d', password):
         return False
-    
     # Check if the password contains at least one special character
     if not re.search(r'[!@#$%^&*(),.?":{}|<>]', password):
         return False
-    
     # If all the conditions are met, the password is valid
     return True
 
 # 4   
-def validate_email(email):  
+def validate_email(email : str) -> bool:  
+    '''
+    Validate the email using regular expression.
+    
+    Parameters
+    ---------- 
+    email
+		Email to validate
+    
+    Return
+    ------
+		bool
+     '''
     if re.match(r"[^@]+@[^@]+\.[^@]+", email):  
          return True  
     return False  
 
 # 5
-def string_capitalization(name):
+def string_capitalization(name : str ) -> str:
+    '''
+     Capitalize first letter of word.
+    Parameters
+    ---------- 
+    name
+     Word to capitalize .
+     
+    Return
+    ------
+    string
+      '''
     return name.capitalize()
 
-def main():
-	message = "GEEKS-FOR-GEEKS"
-	result = encrypt(message.upper())
-	print (result)
 
-	message = "--. . . -.- ... -....- ..-. --- .-. -....- --. . . -.- ... "
-	result = decrypt(message)
-	print (result)
-
-# Executes the main function
-if __name__ == '__main__':
-    main()
-    print(2, temp_converter("F","C",45))
-    print(3,validate_password("qwe2344!@@"))
-    print(4,validate_email("zain@gmail.com"))
-    print(5,string_capitalization("zzzain"))
+# # Executes the main function
+# if __name__ == '__main__':
+#     main()
+#     print(2, temp_converter("F","C",45))
+#     print(3,validate_password("qwe2344!@@"))
+#     print(4,validate_email("zain@gmail.com"))
+#     print(5,string_capitalization("zzzain"))

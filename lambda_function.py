@@ -1,7 +1,16 @@
-import tools as tl
+''' Lamda function to implement different services'''
 import json
-services = ["moorse_code", "temp_converter", "validate_password", "validate_email", "capitalize_string"]
-def lambda_handler(event_jsonified, context):
+import tools as tl
+
+
+services = [
+            "moorse_code",
+            "temp_converter",
+            "validate_password",
+            "validate_email",
+            "capitalize_string"
+            ]
+def lambda_handler(event_jsonified, context = None):
     """
     lambda function to perform function.
 
@@ -24,7 +33,7 @@ def lambda_handler(event_jsonified, context):
         parameters = event["parameters"]
         print(use,  parameters)
         if use not in services:
-            outputs["error"] = "Service not available"
+            output["error"] = "Service not available"
         else:
             try:
                 if use == "moorse_code":
@@ -48,10 +57,9 @@ def lambda_handler(event_jsonified, context):
                             else :
                                 output["error"] = "Value of temprature not found"
                         else:
-                            outpput["error"] = "Conversion Symbol not valid (from)"
+                            output["error"] = "Conversion Symbol not valid (from)"
                     else:
                         output["error"] = "Parent symbol not valid (to) "
-
                 elif use == "validate_password":
                     parameters = event["parameters"]
                     password = parameters["password"]
@@ -70,9 +78,7 @@ def lambda_handler(event_jsonified, context):
                         return ({'status_code' : 200,
                                 'body': json.dumps(output)})
                     else: 
-                        output["error"] = "Email not provided"
-
-            
+                        output["error"] = "Email not provided"            
                 elif use == "capitalize_string":
                     parameters = event["parameters"]
                     string = parameters["string"]
@@ -98,9 +104,8 @@ def lambda_handler(event_jsonified, context):
                             'Access-Control-Allow-Origin': '*',
                             'Access-Control-Allow-Methods': '*'
                         },
-                        'Message': output
-                        
-                    }    
+                        'Message': output 
+                    }
     except Exception as identifier:
         return {'StatusCode': 400,
                 'Error': identifier,
@@ -110,5 +115,5 @@ def lambda_handler(event_jsonified, context):
                             'Access-Control-Allow-Methods': '*'
                         },
                 "Message" : "Bad Params"
-                }       
-            
+                }
+    

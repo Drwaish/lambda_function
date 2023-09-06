@@ -22,4 +22,5 @@ request = {"use" : "temp_converter" ,
 content = None
 requests = {}
 requests["body"] = json.dumps(request)
-print(lf.lambda_handler(requests, content))
+result = lf.lambda_handler(requests, content)
+print(json.dumps(result, indent=4))
