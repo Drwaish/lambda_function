@@ -1,3 +1,4 @@
+'''Implement Services, provided in lambda function '''
 import re
 
 # Python program to implement Morse Code Translator
